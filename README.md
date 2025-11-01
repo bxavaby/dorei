@@ -4,8 +4,8 @@
 
 ───────────────────
 
-![CLI](https://img.shields.io/badge/CLI-000000?style=for-the-badge&logo=gnometerminal&logoColor=00ADD8)
-![Go](https://img.shields.io/badge/go-%23000000.svg?style=for-the-badge&logo=go&logoColor=00ADD8)
+![Deps](https://img.shields.io/badge/0-deps?style=plastic&label=deps&labelColor=000000&color=00ADD8)
+[![Last Commit](https://img.shields.io/github/last-commit/bxavaby/rnm?style=plastic&labelColor=000000&color=00ADD8)](https://github.com/bxavaby/rnm/commits/main)
 
 # _dorei_
 
