@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/dorei.svg" width="320" alt="dorei logo" />
+<img src="assets/dorei.svg" width="360" alt="dorei logo" />
 
 ───────────────────
 
