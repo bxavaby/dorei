@@ -1,21 +1,18 @@
 <div align="center">
 
-<img src="assets/dorei.svg" width="360" alt="dorei logo" />
+<img src="assets/help.png" width="746" alt="dorei help" />
 
 ───────────────────
 
 ![Deps](https://img.shields.io/badge/0-deps?style=plastic&label=deps&labelColor=000000&color=00ADD8)
 [![Last Commit](https://img.shields.io/github/last-commit/bxavaby/rnm?style=plastic&labelColor=000000&color=00ADD8)](https://github.com/bxavaby/rnm/commits/main)
 
-# _dorei_
-
-### A *lesser-cron* that pairs absolute granuality (second) with a simplified interval format
-
 <br>
 
-<img src="assets/help.png" width="746" alt="dorei help" />
+### dorei (奴隷) is a command-line tool that runs a **standalone daemon**, which uses a simplified interval format combined with absolute granularity (second), thence operating as a *lesser-cron* of sorts
+#
 
-<br><br>
+<br>
 
 <div align="left">
 
