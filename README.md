@@ -1,16 +1,20 @@
 <div align="center">
 
-<img src="assets/help.png" width="746" alt="dorei help" />
+![Deps](https://img.shields.io/badge/1-deps?style=plastic&label=deps&labelColor=000000&color=00ADD8)
+[![Last Commit](https://img.shields.io/github/last-commit/bxavaby/rnm?style=plastic&labelColor=000000&color=00ADD8)](https://github.com/bxavaby/rnm/commits/main)
 
 ───────────────────
 
-![Deps](https://img.shields.io/badge/0-deps?style=plastic&label=deps&labelColor=000000&color=00ADD8)
-[![Last Commit](https://img.shields.io/github/last-commit/bxavaby/rnm?style=plastic&labelColor=000000&color=00ADD8)](https://github.com/bxavaby/rnm/commits/main)
+#### dorei (奴隷) is a command-line tool that
+#### runs a **standalone daemon**, which uses
+#### a simplified interval format combined
+#### with absolute granularity, thence
+#### operating as a *lesser-cron* of sorts
+#
 
 <br>
 
-### dorei (奴隷) is a command-line tool that runs a **standalone daemon**, which uses a simplified interval format combined with absolute granularity (second), thence operating as a *lesser-cron* of sorts
-#
+<img src="assets/help.png" width="746" alt="dorei help" />
 
 <br>
 
@@ -23,7 +27,7 @@
 - [ ] System shell execution (no sandboxing)
 - [ ] Simple error handling (log + continue)
 - [ ] Concurrent timers (1 goroutine per task)
-- [ ] Log notifications via matrix (notify)
+- [x] Log notifications via matrix (notify)
 - [ ] ...
 - [ ] Nix-shell command wrapper ([nix] prefix in config)
 - [ ] Hot-reload dorei.conf (avoid daemon restart)
