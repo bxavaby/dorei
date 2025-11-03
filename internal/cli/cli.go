@@ -6,6 +6,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/bxavaby/dorei/internal/conf"
+	"github.com/bxavaby/dorei/internal/noti"
 )
 
 func Logo() string {
@@ -28,6 +31,29 @@ func Logo() string {
 `
 	return logo
 }
+
+/*
+func Logo() string {
+	logo := `
+              .___                   .__
+            __| _/___________   ____ |__|
+           / __ |/  _ \_  __ \_/ __ \|  |
+          / /_/ (  <_> )  | \/\  ___/|  |
+          \____ |\____/|__|    \___  >__|
+               \/                  \/
+
+          :::::::::::::::::::::::::::::::
+                >_ ARR bxavaby 2025     +
+          :::::::::::::::::::::::::::::::
+
+          +-----------------------------+
+          |    lesser-cron scheduler    |
+          |      command-line tool      |
+          +-----------------------------+
+`
+	return logo
+}
+*/
 
 func Help() string {
 	help := `
@@ -52,6 +78,11 @@ func Version() string {
 	version := "v0.1.0"
 
 	return version
+}
+
+// Add task to config
+func AddTask() {
+	return
 }
 
 func Run() int {
@@ -96,6 +127,7 @@ func Run() int {
 	case "-a", "--add", "add":
 		singleWell("Opening your config...")
 		// Logic for "adding", aka opening the config LOL
+		AddTask()
 		return 0
 	case "-d", "--dry-run", "dry-run":
 		singleWell("Dry running your set tasks...")
@@ -105,6 +137,7 @@ func Run() int {
 	case "-m", "--matrix", "matrix":
 		singleWell("Matrix notifications toggled!")
 		// Logic to toggle [matrix] enable true/flase
+		noti.Enable()
 		return 0
 	default:
 		fmt.Println("Unknown argument: ", os.Args[1])
