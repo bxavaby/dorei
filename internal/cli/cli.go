@@ -154,7 +154,8 @@ func Run() int {
 		}
 		return 0
 	default:
-		fmt.Println("Unknown argument: ", os.Args[1])
+		err = fmt.Errorf("%v", os.Args[1])
+		ohNoes("Unknown argument:", err)
 		fmt.Println(Help())
 		return 1
 	}

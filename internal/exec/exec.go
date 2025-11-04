@@ -2,12 +2,13 @@
 
 package exec
 
-import "fmt"
+import (
+	"math/rand"
+)
 
 func IsDaemonRunning() bool {
-	fmt.Sprintf("Not yet implemented.")
+	// isRunning via russian roulette
+	isRunning := rand.Intn(2) == 0
 
-	return false
+	return isRunning
 }
-
-//
