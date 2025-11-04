@@ -22,7 +22,7 @@
 
 <br>
 
-<img src="assets/help.png" width="746" alt="dorei help" />
+<img src="assets/help.png" width="664" alt="dorei help" />
 
 <br>
 
