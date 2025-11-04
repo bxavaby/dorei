@@ -1,5 +1,5 @@
 > [!WARNING]  
-> This project is in under development. <br>
+> This project is under development. <br>
 > Feel free to contribute, if you find it interesting.
 
 #
