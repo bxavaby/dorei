@@ -117,7 +117,7 @@ func ParseConfig(configPath string) (*Config, error) {
 		}
 	}
 
-	if scannerErr := scanner.Err(); scanner.Err != nil {
+	if scannerErr := scanner.Err(); scannerErr != nil {
 		return nil, scannerErr
 	}
 

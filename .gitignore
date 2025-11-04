@@ -1,0 +1,6 @@
+bin/
+build/
+out/
+tmp/
+
+xcomp.sh

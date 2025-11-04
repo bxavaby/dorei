@@ -13,8 +13,8 @@ import (
 
 // Abstract notify.Notify and matrix
 type Notifier struct {
-	notifier *notify.Notifier
-	matrix   *matrix.Service
+	notifier notify.Notifier
+	matrix   *matrix.Matrix
 	enabled  bool
 	mu       sync.Mutex
 }
@@ -26,22 +26,22 @@ func New(userID, roomID, homeServer, accessToken string, enabled bool) (*Notifie
 		return n, nil
 	}
 
-	matrix, err := matrix.New(userID, roomID, homeServer, accessToken)
+	matrixSvc, err := matrix.New("user-id", "room-id", "home-server", "access-token")
 	if err != nil {
 		return nil, err
 	}
 
 	notifier := notify.New()
-	notifier.UseServices(matrix)
+	notifier.UseServices(matrixSvc)
 
 	n.notifier = notifier
-	n.matrix = matrix
+	n.matrix = matrixSvc
 
 	return n, nil
 }
 
 // If enabled=true, send message to the room
-func (n *Notifier) Send(ctxt context.Context, noti string) error {
+func (n *Notifier) Send(ctx context.Context, noti string) error {
 	n.mu.Lock()
 	defer n.mu.Unlock()
 
@@ -49,7 +49,7 @@ func (n *Notifier) Send(ctxt context.Context, noti string) error {
 		return nil
 	}
 
-	err := n.notifier.Send(ctxt, "", noti)
+	err := n.notifier.Send(ctx, "", noti)
 	if err != nil {
 		log.Printf("notifier.Send() failed: %v", err)
 	}
@@ -60,6 +60,12 @@ func (n *Notifier) Send(ctxt context.Context, noti string) error {
 // Dynamic toggle
 func (n *Notifier) Enable(flag bool) {
 	n.mu.Lock()
-	defer n.mu.Unclock()
+	defer n.mu.Unlock()
 	n.enabled = flag
+}
+
+func (n *Notifier) IsEnabled() bool {
+	n.mu.Lock()
+	defer n.mu.Unlock()
+	return n.enabled
 }

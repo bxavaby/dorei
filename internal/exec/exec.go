@@ -2,4 +2,10 @@
 
 package exec
 
-import ()
+import "fmt"
+
+func IsDaemonRunning() bool {
+	fmt.Sprintf("Not yet implemented.")
+
+	return false
+}

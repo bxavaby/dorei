@@ -100,7 +100,6 @@ in addition to nix-shell
 ----------------------------
 
 Hope this will serve you somehow.
-Don't whip it, though :(
 
 Licensed under the MIT License.
 Copyright (c) 2025 bxavaby
@@ -111,8 +110,9 @@ Repo: https://github.com/bxavaby/dorei
 package main
 
 import (
-	"github.com/bxavaby/dorei/cli"
 	"os"
+
+	"github.com/bxavaby/dorei/internal/cli"
 )
 
 func main() {

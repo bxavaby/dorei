@@ -8,68 +8,45 @@ import (
 	"strings"
 
 	"github.com/bxavaby/dorei/internal/conf"
+	"github.com/bxavaby/dorei/internal/exec"
 	"github.com/bxavaby/dorei/internal/noti"
 )
 
 func Logo() string {
 	logo := `
-              .___                   .__
-      /\    __| _/___________   ____ |__|  /\
-      \/   / __ |/  _ \_  __ \_/ __ \|  |  \/
-      /\  / /_/ (  <_> )  | \/\  ___/|  |  /\
-      \/  \____ |\____/|__|    \___  >__|  \/
-               \/                  \/
+    .___                   .__
+  __| _/___________   ____ |__|
+ / __ |/  _ \_  __ \_/ __ \|  |
+/ /_/ (  <_> )  | \/\  ___/|  |
+\____ |\____/|__|    \___  >__|
+     \/                  \/
 
-          :::::::::::::::::::::::::::::::
-                >_ ARR bxavaby 2025     +
-          :::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::
+      >_ ARR bxavaby 2025     +
+:::::::::::::::::::::::::::::::
 
-          +-----------------------------+
-          |    lesser-cron scheduler    |
-          |      command-line tool      |
-          +-----------------------------+
++-----------------------------+
+|    lesser-cron scheduler    |
+|      command-line tool      |
++-----------------------------+
 `
 	return logo
 }
-
-/*
-func Logo() string {
-	logo := `
-              .___                   .__
-            __| _/___________   ____ |__|
-           / __ |/  _ \_  __ \_/ __ \|  |
-          / /_/ (  <_> )  | \/\  ___/|  |
-          \____ |\____/|__|    \___  >__|
-               \/                  \/
-
-          :::::::::::::::::::::::::::::::
-                >_ ARR bxavaby 2025     +
-          :::::::::::::::::::::::::::::::
-
-          +-----------------------------+
-          |    lesser-cron scheduler    |
-          |      command-line tool      |
-          +-----------------------------+
-`
-	return logo
-}
-*/
 
 func Help() string {
 	help := `
+Usage: dorei [options]
 
-          Usage: dorei [options]
+Options:
+  -h, --help          Display this help message
+  -v, --version       Display the version number
 
-     	  Options:
-        	 -h, --help             Display this help message
-			 -v, --version          Display the version number
-
-			 -a, --add              Add an entry to the config
-			 						interactively with editor
-			 -d, --dry-run          Print all scheduled commands 
-		                       	 	without running
-		     -m, --matrix			Toggle notifications on/off
-		     						in [matrix] settings
+  -a, --add           Add an entry to the config
+                      interactively with editor
+  -d, --dry-run       Print all scheduled commands
+                      without running
+  -m, --matrix        Toggle notifications on/off
+                      in [matrix] settings
 `
 	return help
 }
@@ -86,9 +63,30 @@ func AddTask() {
 }
 
 func Run() int {
+	// Parse config
+	configPath, _ := conf.ConfigPath()
+	cfg, err := conf.ParseConfig(configPath)
+	if err != nil {
+		ohNoes("Error loading config: %s", err)
+		return 1
+	}
+
+	// Initialize notifier
+	notifier, err := noti.New(
+		cfg.Matrix.UserID,
+		cfg.Matrix.RoomID,
+		cfg.Matrix.HomeServer,
+		cfg.Matrix.AccessToken,
+		cfg.Matrix.Enabled,
+	)
+	if err != nil {
+		ohNoes("Error initializing notifier: %s", err)
+		return 1
+	}
+
 	if len(os.Args) < 2 {
 		// No args == YesOrNo() daemon
-		running := isDaemonRunning()
+		running := exec.IsDaemonRunning()
 		var question string
 		if running {
 			question = "Do you want to stop dorei?"
@@ -135,14 +133,23 @@ func Run() int {
 		// in a VERY readable format LOL
 		return 0
 	case "-m", "--matrix", "matrix":
-		singleWell("Matrix notifications toggled!")
-		// Logic to toggle [matrix] enable true/flase
-		noti.Enable()
+		// Logic to toggle [matrix] enabled true/flase
+		// 1st check its state
+		currentState := notifier.IsEnabled()
+
+		// Then reverse it
+		newState := !currentState
+		notifier.Enable(newState)
+
+		if newState {
+			singleWell("Notifications enabled!")
+		} else {
+			singleWell("Notifications disabled!")
+		}
 		return 0
 	default:
 		fmt.Println("Unknown argument: ", os.Args[1])
 		fmt.Println(Help())
-
 		return 1
 	}
 }

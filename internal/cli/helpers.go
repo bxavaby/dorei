@@ -22,8 +22,8 @@ func greatSuccess(msg string) {
 	fmt.Printf("%s✓ %s%s\n", green, msg, reset)
 }
 
-func ohNoes(msg string) {
-	fmt.Fprintf(os.Stderr, "%s✗ %s%s\n", red, msg, reset)
+func ohNoes(msg string, err error) {
+	fmt.Fprintf(os.Stderr, "%s✗ %s %s%s\n", red, msg, err, reset)
 }
 
 func singleWell(msg string) {
