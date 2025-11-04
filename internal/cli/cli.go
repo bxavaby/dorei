@@ -141,7 +141,13 @@ func Run() int {
 		newState := !currentState
 		notifier.Enable(newState)
 
-		if newState {
+		// Write back
+		if err := conf.UpdateMatrixSection(configPath, newState); err != nil {
+			ohNoes("Could not save config: %v\n", err)
+			return 1
+		}
+
+		if newState == true {
 			singleWell("Notifications enabled!")
 		} else {
 			singleWell("Notifications disabled!")

@@ -123,3 +123,46 @@ func ParseConfig(configPath string) (*Config, error) {
 
 	return config, nil
 }
+
+func UpdateMatrixSection(configPath string, enabled bool) error {
+	file, err := os.Open(configPath)
+	if err != nil {
+		return err
+	}
+
+	var lines []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	file.Close()
+
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+
+	var newLines []string
+	inMatrixSection := false
+	keyUpdated := false
+
+	for _, line := range lines {
+		trimmedLine := strings.TrimSpace(line)
+
+		if strings.HasPrefix(trimmedLine, "[") && strings.HasSuffix(trimmedLine, "]") {
+			inMatrixSection = (trimmedLine == "[matrix]")
+		}
+
+		if inMatrixSection && strings.HasPrefix(trimmedLine, "enabled=") {
+			newLines = append(newLines, "enabled="+strconv.FormatBool(enabled))
+			keyUpdated = true
+		} else {
+			newLines = append(newLines, line)
+		}
+	}
+
+	if inMatrixSection && !keyUpdated {
+		newLines = append(newLines, "enabled="+strconv.FormatBool(enabled))
+	}
+
+	return os.WriteFile(configPath, []byte(strings.Join(newLines, "\n")+"\n"), 0644)
+}
