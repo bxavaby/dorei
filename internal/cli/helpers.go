@@ -11,10 +11,10 @@ import (
 )
 
 const (
-	green  = "\033[32m"
-	red    = "\033[31m"
-	blue   = "\033[34m"
-	yellow = "\033[33m"
+	green  = "\033[46m"
+	red    = "\033[160m"
+	blue   = "\033[27m"
+	yellow = "\033[226m"
 	reset  = "\033[0m"
 )
 
