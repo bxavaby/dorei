@@ -11,9 +11,12 @@ TARGETS=(
 	"linux amd64"
 	"linux arm64"
 	"darwin amd64"
+<<<<<<< HEAD
 	"darwin arm64"
 	"windows amd64"
 	"windows arm64"
+=======
+>>>>>>> 7036a831af043a30ea6c364a37a733b41b301c4b
 )
 
 clear
