@@ -12,7 +12,6 @@ TARGETS=(
 	"linux arm64"
 	"linux 386"
 	"darwin amd64"
-	"darwin 386"
 )
 
 clear
