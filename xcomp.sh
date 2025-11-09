@@ -8,9 +8,9 @@ DIR="go-out"
 mkdir -p "$DIR"
 
 TARGETS=(
-	"linux x86_64"
+	"linux amd64"
 	"linux arm64"
-	"darwin x86_64"
+	"darwin amd64"
 	"darwin arm64"
 	"windows amd64"
 	"windows arm64"
