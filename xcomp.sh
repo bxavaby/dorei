@@ -8,15 +8,12 @@ DIR="go-out"
 mkdir -p "$DIR"
 
 TARGETS=(
-	"linux amd64"
+	"linux x86_64"
 	"linux arm64"
-	"darwin amd64"
-<<<<<<< HEAD
+	"darwin x86_64"
 	"darwin arm64"
 	"windows amd64"
 	"windows arm64"
-=======
->>>>>>> 7036a831af043a30ea6c364a37a733b41b301c4b
 )
 
 clear
